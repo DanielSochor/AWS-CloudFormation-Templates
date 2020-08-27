@@ -1,6 +1,8 @@
 Resources:
   TestS3Bucket:
     Type: AWS::S3::Bucket
+    Properties:
+      BucketName: AHEAD.S3.Test.Bucket
 
   TestS3BucketPolicy:
     Type: AWS::S3::BucketPolicy

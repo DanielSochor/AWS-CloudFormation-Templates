@@ -2,4 +2,7 @@ Resources:
   TestS3Bucket:
     Type: AWS::S3::Bucket
 
-#Need to add Role information
+  TestS3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+
+#Goal is limit bucket access to a specific IP

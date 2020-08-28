@@ -1,8 +1,10 @@
+#stack name: ahead.test.bucket.w.policy
+
 Resources:
   TestS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: ahead.s3.test.bucket
+      BucketName: ahead.test.bucket
 
   TestS3BucketPolicy:
     Type: AWS::S3::BucketPolicy
@@ -13,7 +15,7 @@ Resources:
         Principal: "*"
         Action: s3:PutObject
         Resource: 
-          #ARN: arn:aws:s3:::ahead.s3.test.bucket
+          ARN: arn:aws:s3:::ahead.test.bucket
           #actual ARN from console: ahead.s3.test.bucket
           #arn:partition:service:region:namespace:relative-id
         Condition: 

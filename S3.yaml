@@ -1,4 +1,4 @@
-#stack name: ahead.test.bucket.w.policy
+#stack name: ahead-test-bucket-w-policy
 
 Resources:
   TestS3Bucket:

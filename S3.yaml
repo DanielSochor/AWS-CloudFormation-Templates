@@ -4,21 +4,21 @@ Resources:
     Properties:
       BucketName: ahead.s3.test.bucket
 
-  #TestS3BucketPolicy:
-    #Type: AWS::S3::BucketPolicy
-    #Properties:
-      #Statement: 
-        #Sid: SingleIPAllow
-        #Effect: Deny
-        #Principal: "*"
-        #Action: s3:PutObject
-        #Resource: 
+  TestS3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Statement: 
+        Sid: SingleIPAllow
+        Effect: Deny
+        Principal: "*"
+        Action: s3:PutObject
+        Resource: 
           #ARN: arn:aws:s3:::ahead.s3.test.bucket
           #actual ARN from console: ahead.s3.test.bucket
           #arn:partition:service:region:namespace:relative-id
-        #Condition: 
-          #NotIpAddress: 
-            #aws:SourceIp: 207.181.210.113
+        Condition: 
+          NotIpAddress: 
+            aws:SourceIp: 207.181.210.113
 
 #MBP external IP: same   
 #iMac external IP: 207.181.210.113

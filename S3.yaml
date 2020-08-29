@@ -18,8 +18,8 @@ Resources:
           Effect: Deny
           Principal: "*"
           Action: s3:PutObject
-          #Resource: 
-            #ARN: arn:aws:s3:::ahead.test.bucket
+          Resource: 
+            ARN: arn:aws:s3:::ahead.test.bucket
             #actual ARN from console: ahead.s3.test.bucket
             #arn:partition:service:region:namespace:relative-id
           Condition: 

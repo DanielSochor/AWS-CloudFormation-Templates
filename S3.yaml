@@ -10,6 +10,7 @@ Resources:
   TestS3BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
+      Bucket: !Ref TestS3Bucket
       PolicyDocument:
         Version: 2012-10-17
         Statement: 

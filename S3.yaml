@@ -17,18 +17,8 @@ Resources:
           Sid: SingleIPAllow
           Effect: Deny
           Principal: "*"
-          Action: "*"
-          Resource: "*"
-          #Action: s3:PutObject
-          #Resource: arn:aws:s3:::ahead.test.bucket
-            #actual ARN from console: ahead.s3.test.bucket
-            #arn:aws:s3:::ahead.test.bucket
-            #arn:partition:service:region:namespace:relative-id
+          Action: s3:PutObject
+          Resource: "arn:aws:s3:::ahead.test.bucket/*"
           Condition: 
             NotIpAddress: 
-              aws:SourceIp: "207.181.210.113/0"
-
-#MBP external IP: same   
-#iMac external IP: 207.181.210.113
-
-#Goal is to limit IP from adding to the bucket
+              aws:SourceIp: "207.181.210.113"

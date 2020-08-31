@@ -17,8 +17,10 @@ Resources:
           Sid: SingleIPAllow
           Effect: Deny
           Principal: "*"
-          Action: s3:PutObject
-          Resource: arn:aws:s3:::ahead.test.bucket
+          Action: "*"
+          Resource: "*"
+          #Action: s3:PutObject
+          #Resource: arn:aws:s3:::ahead.test.bucket
             #actual ARN from console: ahead.s3.test.bucket
             #arn:aws:s3:::ahead.test.bucket
             #arn:partition:service:region:namespace:relative-id

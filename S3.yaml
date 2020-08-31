@@ -26,7 +26,7 @@ Resources:
             #arn:partition:service:region:namespace:relative-id
           Condition: 
             NotIpAddress: 
-              aws:SourceIp: "207.181.210.113"
+              aws:SourceIp: "207.181.210.113/0"
 
 #MBP external IP: same   
 #iMac external IP: 207.181.210.113

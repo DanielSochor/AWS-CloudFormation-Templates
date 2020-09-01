@@ -26,3 +26,4 @@ Resources:
 #What I learned:
 #Bucket field in Policy needs !Ref
 #Resource in Bucket Policy needs /*
+#In the policy setting the Effect to Allow can be a security issue 

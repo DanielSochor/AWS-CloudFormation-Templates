@@ -1,2 +1,3 @@
 #deploy an F1 EC2 with Dragen
 #when you launch an EC2 you must specify the subnet
+#when adding a subnet you must specify the AZ in which to place the subnet

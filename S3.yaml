@@ -15,13 +15,13 @@ Resources:
         Version: 2012-10-17
         Statement: 
           Sid: SingleIPAllow
-          Effect: Allow
+          Effect: Deny
           Principal: "*"
           Action: s3:PutObject
           Resource: "arn:aws:s3:::ahead.test.bucket/*"
-          Condition: 
-            NotIpAddress: 
-              aws:SourceIp: "207.181.210.113/32"
+          #Condition: 
+            #NotIpAddress: 
+              #aws:SourceIp: "207.181.210.113/32"
 
 #What I learned:
 #Bucket field in Policy needs !Ref

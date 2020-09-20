@@ -1,3 +1,15 @@
 AWSTemplateFormatVersion: 2010-09-09
 
 Description: This template can be used in CloudFormation to deploy a role, volume, and f1 instance
+
+Resources:
+  EC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      ImageId: !Ref AmiId
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      SecurityGroupIds:
+        - !Ref SecurityGroupId
+      SubnetId: !Ref SubnetId

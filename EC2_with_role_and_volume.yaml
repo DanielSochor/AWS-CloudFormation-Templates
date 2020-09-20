@@ -46,3 +46,10 @@ Resources:
               Action:
                 - 'sts:AssumeRole'
       Path: /
+
+  EC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: EC2InstanceProfile
+      Roles:
+        - !Ref S3Role

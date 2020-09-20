@@ -14,7 +14,12 @@ Parameters:
     AllowedValues:
     - "f1.2xlarge"
     - "f1.4xlarge"
-    
+  KeyName:
+    Type: String
+    Description: The key used to SSH into the f1
+    Default: "NGS-key01"
+    AllowedValues:
+    - NGS-key01  
 Resources:
   EC2:
     Type: AWS::EC2::Instance

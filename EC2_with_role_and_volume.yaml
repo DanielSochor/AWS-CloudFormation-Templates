@@ -47,6 +47,11 @@ Parameters:
     - "sc1"
     - "st1"
     - "standard"
+  DeviceName:
+    Type: String
+    Description: Volume Device Name
+    Default: "/dev/sdc"
+    
 Resources:
   EC2:
     Type: AWS::EC2::Instance

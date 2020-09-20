@@ -20,7 +20,10 @@ Parameters:
     Default: "NGS-key01"
     AllowedValues:
     - NGS-key01  
-    
+  SecurityGroupId:
+    Type: AWS::EC2::SecurityGroup::Id
+    Description: Security Group Id
+    Default: "sg-071e8edf7bdbcd862"   
 Resources:
   EC2:
     Type: AWS::EC2::Instance

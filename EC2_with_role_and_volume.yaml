@@ -20,6 +20,7 @@ Parameters:
     Default: "NGS-key01"
     AllowedValues:
     - NGS-key01  
+    
 Resources:
   EC2:
     Type: AWS::EC2::Instance

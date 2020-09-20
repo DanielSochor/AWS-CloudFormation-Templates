@@ -24,3 +24,9 @@ Resources:
         - Key: BusinessUnit
           Value: NGS
       VolumeType: !Ref VolType
+  VolumeAttachment:
+      Type: AWS::EC2::VolumeAttachment
+      Properties:
+        Device: !Ref DeviceName
+        InstanceId: !Ref EC2
+        VolumeId: !Ref Volume

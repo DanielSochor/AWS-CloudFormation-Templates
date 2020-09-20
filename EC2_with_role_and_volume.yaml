@@ -31,7 +31,7 @@ Parameters:
   KmsKeyId:
     Type: String
     Description: KMS key Id
-    Default: "arn:aws:kms:us-east-2:522085032638:key/bf3e8d8b-3cab-4395-b4bd-9f50e7a462c1"
+    Default: "arn:aws:kms:us-east-2:-"
   VolSize:
     Type: Number
     Description: Volume Size
@@ -51,7 +51,7 @@ Parameters:
     Type: String
     Description: Volume Device Name
     Default: "/dev/sdc"
-    
+
 Resources:
   EC2:
     Type: AWS::EC2::Instance

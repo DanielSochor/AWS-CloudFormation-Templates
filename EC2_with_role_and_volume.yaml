@@ -36,6 +36,17 @@ Parameters:
     Type: Number
     Description: Volume Size
     Default: 100
+  VolType:
+    Type: String
+    Description: Volume Type
+    Default: gp2
+    AllowedValues:
+    - "gp2"
+    - "io1"
+    - "io2"
+    - "sc1"
+    - "st1"
+    - "standard"
 Resources:
   EC2:
     Type: AWS::EC2::Instance

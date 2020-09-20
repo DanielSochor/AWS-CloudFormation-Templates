@@ -7,7 +7,14 @@ Parameters:
     Type: AWS::EC2::Image::Id
     Description: The AMI Id for the Dragen image
     Default: "ami-0253643e935bd5c9c"
-
+  InstanceType:
+    Type: String
+    Description: The type of instance to be deployed
+    Default: "f1.2xlarge"
+    AllowedValues:
+    - "f1.2xlarge"
+    - "f1.4xlarge"
+    
 Resources:
   EC2:
     Type: AWS::EC2::Instance

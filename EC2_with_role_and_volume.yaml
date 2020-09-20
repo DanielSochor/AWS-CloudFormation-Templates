@@ -13,3 +13,14 @@ Resources:
       SecurityGroupIds:
         - !Ref SecurityGroupId
       SubnetId: !Ref SubnetId
+  Volume:
+    Type: AWS::EC2::Volume
+    Properties:
+      AvailabilityZone: !GetAtt EC2.AvailabilityZone
+      Encrypted: true
+      KmsKeyId: !Ref KmsKeyId
+      Size: !Ref VolSize
+      Tags:
+        - Key: BusinessUnit
+          Value: NGS
+      VolumeType: !Ref VolType

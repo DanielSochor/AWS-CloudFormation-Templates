@@ -4,7 +4,7 @@ Description: EC2 Parameter Store value for Primary Dragen Linux AMI
 Parameters:
   LinuxPrimaryDragenAmiId:
     Type: String
-    Default: "ami-0253643e935bd5c9c "
+    Default: "ami-0253643e935bd5c9c"
     Description: Primary AMI id for Linux Primary Dragen Instance
 
 Resources:

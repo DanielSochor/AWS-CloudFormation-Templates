@@ -1,17 +1,17 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: EC2 Parameter Store values for Dragen Linux AMI
+Description: EC2 Parameter Store value for Primary Dragen Linux AMI
 
 Parameters:
-  WindowsPrimaryAmiId:
+  LinuxPrimaryDragenAmiId:
     Type: String
-    Default: ""
-    Description: Primary AMI id for Windows platforms
+    Default: "ami-0253643e935bd5c9c "
+    Description: Primary AMI id for Linux Primary Dragen Instance
 
 Resources:
-  WindowsPrimaryParameterStore:
+  LinuxDragenPrimaryParameterStore:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: ec2-ami-windows-primary
+      Name: ec2-ami-linux-primary-dragen
       Type: String
-      Value: !Ref WindowsPrimaryAmiId
-      Description: Primary AMI id for Windows platforms
+      Value: !Ref LinuxPrimaryDragenAmiId
+      Description: Primary AMI id for Linux Dragen Instance

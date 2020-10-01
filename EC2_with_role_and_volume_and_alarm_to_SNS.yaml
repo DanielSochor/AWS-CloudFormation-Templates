@@ -1,0 +1,161 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: This template can be used in CloudFormation to deploy a role, volume, and f1 instance for the Dragen application. When the instance is run past 2hr it alarms to SNS and sends an email.
+
+Parameters:
+  AmiId:
+    Type: AWS::EC2::Image::Id
+    Description: The AMI Id for the Dragen image
+    Default: "ami-0253643e935bd5c9c"
+  InstanceType:
+    Type: String
+    Description: The type of instance to be deployed
+    Default: "f1.2xlarge"
+    AllowedValues:
+    - "f1.2xlarge"
+    - "f1.4xlarge"
+  KeyName:
+    Type: String
+    Description: The key used to SSH into the f1
+    Default: "NGS-key01"
+    AllowedValues:
+    - NGS-key01
+  SecurityGroupId:
+    Type: AWS::EC2::SecurityGroup::Id
+    Description: Security Group Id
+    Default: "sg-071e8edf7bdbcd862"
+  SubnetId:
+    Type: String
+    Description: Subnet Id
+    Default: "subnet-0f9186e42fd71b1af"
+  KmsKeyId:
+    Type: String
+    Description: KMS key Id
+    Default: "arn:aws:kms:us-east-2:522085032638:key/bf3e8d8b-3cab-4395-b4bd-9f50e7a462c1"
+  VolSize:
+    Type: Number
+    Description: Volume Size
+    Default: 100
+  VolType:
+    Type: String
+    Description: Volume Type
+    Default: gp2
+    AllowedValues:
+    - "gp2"
+    - "io1"
+    - "io2"
+    - "sc1"
+    - "st1"
+    - "standard"
+  DeviceName:
+    Type: String
+    Description: Volume Device Name
+    Default: "/dev/sdc"
+  PipeLineInstancePofileName:
+    Type: String
+    Description: Pipe Line Role Name
+    Default: "NGSNP_pipeline01"
+
+  Email1:
+    Type: String
+    Description: Email to monitor long running EC2
+  
+  # Email2:
+  #   Type: String
+  #   Description: Email to monitor long running EC2
+  #   Default: "NGSNP_pipeline01"
+  #
+  # Email3:
+  #   Type: String
+  #   Description: Email to monitor long running EC2
+  #   Default: "NGSNP_pipeline01"
+
+Resources:
+  EC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      IamInstanceProfile: !Ref PipeLineInstancePofileName
+      ImageId: !Ref AmiId
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      SecurityGroupIds:
+        - !Ref SecurityGroupId
+      SubnetId: !Ref SubnetId
+      Tags:
+        - Key: BusinessUnit
+          Value: NGS
+  Volume:
+    Type: AWS::EC2::Volume
+    Properties:
+      AvailabilityZone: !GetAtt EC2.AvailabilityZone
+      Encrypted: true
+      KmsKeyId: !Ref KmsKeyId
+      Size: !Ref VolSize
+      Tags:
+        - Key: BusinessUnit
+          Value: NGS
+      VolumeType: !Ref VolType
+  VolumeAttachment:
+      Type: AWS::EC2::VolumeAttachment
+      Properties:
+        Device: !Ref DeviceName
+        InstanceId: !Ref EC2
+        VolumeId: !Ref Volume
+
+  F1RunningAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: F1LongRunning2Hr
+      AlarmDescription: Alarms when the F1 instance is running for a long time
+      AlarmActions:
+        - !Ref 'F1SNSTopic'
+      MetricName: CPUUtilization
+      Namespace: AWS/EC2
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      #this alarms after 25 periods of 300 seconds (5 minutes). The total time is 2:05
+      #although the alarm period target is 2hr an extra 5 minutes it added because
+      #we have discovered without the extra 5min the alarm triggers 5min early
+      EvaluationPeriods: 25
+      Period: 300
+      Statistic: Average
+      Threshold: 0
+      TreatMissingData: notBreaching
+      Dimensions:
+      - Name: "InstanceId"
+        Value:
+          !Ref EC2
+
+  F1SNSTopic:
+    Type: "AWS::SNS::Topic"
+    Properties:
+      Subscription:
+        -
+          Endpoint: !Ref Email1
+          Protocol: email
+        # -
+        #   Endpoint: !GetAtt MessageProxyLambdaFunction.Arn
+        #   Protocol: email
+        # -
+        #   Endpoint: !GetAtt MessageProxyLambdaFunction.Arn
+        #   Protocol: email
+
+
+  F1SnsTopicPolicy:
+    Type: "AWS::SNS::TopicPolicy"
+    Properties:
+      PolicyDocument:
+        Id: F1Alarm
+        Version: '2012-10-17'
+        Statement:
+        - Sid: __default_statement_ID
+          Effect: Allow
+          Principal:
+            AWS: "*"
+          Action:
+          - SNS:Publish
+          Resource: "*"
+          Condition:
+            ArnLike:
+              aws:SourceArn: !GetAtt F1RunningAlarm.Arn
+      Topics:
+        - !Ref F1SNSTopic

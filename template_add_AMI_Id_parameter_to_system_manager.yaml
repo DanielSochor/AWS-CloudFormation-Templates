@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: EC2 Parameter Store values for Windows and Linux AMI IDs
+
+Parameters:
+  WindowsPrimaryAmiId:
+    Type: String
+    Default: ""
+    Description: Primary AMI id for Windows platforms
+
+Resources:
+  WindowsPrimaryParameterStore:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: ec2-ami-windows-primary
+      Type: String
+      Value: !Ref WindowsPrimaryAmiId
+      Description: Primary AMI id for Windows platforms

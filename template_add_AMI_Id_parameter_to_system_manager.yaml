@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: EC2 Parameter Store values for Windows and Linux AMI IDs
+Description: EC2 Parameter Store values for Dragen Linux AMI
 
 Parameters:
   WindowsPrimaryAmiId:

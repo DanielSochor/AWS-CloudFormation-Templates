@@ -3,23 +3,24 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: This template creates an ECR
 
 Resources:
-  Type: AWS::ECR::Repository
-  Properties: 
-    RepositoryName: "test-ECR-repository"
-    # RepositoryPolicyText: 
-    #   Version: "2012-10-17"
-    #   Statement: 
-    #     - 
-    #       Sid: AllowPushPull
-    #       Effect: Allow
-    #       Principal: "*"
-    #         # AWS: 
-    #         #   - "arn:aws:iam::123456789012:user/Bob"
-    #       Action: 
-    #         - "ecr:GetDownloadUrlForLayer"
-    #         - "ecr:BatchGetImage"
-    #         - "ecr:BatchCheckLayerAvailability"
-    #         - "ecr:PutImage"
-    #         - "ecr:InitiateLayerUpload"
-    #         - "ecr:UploadLayerPart"
-    #         - "ecr:CompleteLayerUpload"
+  ECRtest:
+    Type: AWS::ECR::Repository
+    Properties: {}
+      # RepositoryName: 'ECRtest'
+      # RepositoryPolicyText: 
+      #   Version: "2012-10-17"
+      #   Statement: 
+      #     - 
+      #       Sid: AllowPushPull
+      #       Effect: Allow
+      #       Principal: "*"
+      #         # AWS: 
+      #         #   - "arn:aws:iam::123456789012:user/Bob"
+      #       Action: 
+      #         - "ecr:GetDownloadUrlForLayer"
+      #         - "ecr:BatchGetImage"
+      #         - "ecr:BatchCheckLayerAvailability"
+      #         - "ecr:PutImage"
+      #         - "ecr:InitiateLayerUpload"
+      #         - "ecr:UploadLayerPart"
+      #         - "ecr:CompleteLayerUpload"
